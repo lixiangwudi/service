@@ -1,19 +1,30 @@
 package com.example.lx.entity;
 
-import org.springframework.stereotype.Component;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-/**
- * @Author lixiang
- * @Date 2020/5/9 19:53
- * @Version 1.0
- */
+import javax.persistence.*;
 
-@Component
+@Entity
+@Table(name = "user")
+@JsonIgnoreProperties({"handler","hibernateLazyInitializer"})
+
 public class User {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     int id;
+
     String username;
     String password;
+    String salt;
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
 
     public int getId() {
         return id;
